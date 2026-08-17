@@ -14,7 +14,6 @@ export type CampaignEvent =
   | "copiar_pix"
   | "click_whatsapp"
   | "click_instagram"
-  | "click_vakinha"
   | "copiar_link"
   | "scroll_pagina";
 

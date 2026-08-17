@@ -120,7 +120,7 @@ export function Historia() {
     <section id="historia" className="px-5 py-14" aria-labelledby="historia-titulo">
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1fr_1.1fr] md:items-start">
         <div className="aspect-[4/5] overflow-hidden rounded-3xl shadow-soft md:sticky md:top-8">
-          <PhotoFrame src={campaign.fotos[0]?.src} alt="Danelle com a família" label="Foto real da Danelle" />
+          <PhotoFrame src={campaign.fotos[1]?.src || campaign.fotos[0]?.src} alt="Danelle com a família" label="Foto real da Danelle" />
         </div>
         <div>
           <h2 id="historia-titulo" className="text-2xl font-semibold sm:text-3xl">
@@ -204,47 +204,6 @@ export function Galeria() {
   );
 }
 
-export function Progresso() {
-  const { arrecadado, meta, atualizadoEm } = campaign.progresso;
-  const pct = arrecadado && meta ? Math.min(100, Math.round((arrecadado / meta) * 100)) : 0;
-
-  return (
-    <section className="px-5 py-14" aria-labelledby="progresso">
-      <div className="mx-auto max-w-2xl rounded-3xl border border-border bg-card p-6 shadow-soft">
-        <h2 id="progresso" className="text-2xl font-semibold">
-          Progresso da campanha
-        </h2>
-        <div className="mt-5 grid grid-cols-3 gap-4 items-end">
-          <div>
-            <p className="text-sm text-muted-foreground">Já arrecadamos</p>
-            <p className="text-2xl font-bold text-primary">
-              {arrecadado !== null ? brl(arrecadado) : "R$ [VALOR ATUAL]"}
-            </p>
-          </div>
-          <div className="text-center pb-1">
-            <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
-              {pct}% atingido
-            </span>
-          </div>
-          <div className="text-right">
-            <p className="text-sm text-muted-foreground">Meta</p>
-            <p className="text-2xl font-bold">{meta !== null ? brl(meta) : "R$ [META]"}</p>
-          </div>
-        </div>
-        <div className="mt-4 h-4 w-full overflow-hidden rounded-full bg-muted relative shadow-inner">
-          <div
-            className="h-full rounded-full bg-gradient-to-r from-primary to-emerald-400 transition-[width] duration-500 relative"
-            style={{ width: `${pct}%` }}
-          />
-        </div>
-        <p className="mt-3 text-xs text-muted-foreground">
-          Última atualização: {atualizadoEm}. Os valores são atualizados manualmente pela família.
-        </p>
-      </div>
-    </section>
-  );
-}
-
 export function Transparencia() {
   return (
     <section className="bg-secondary/50 px-5 py-14" aria-labelledby="transparencia">
@@ -299,31 +258,6 @@ export function Atualizacoes() {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-export function Vakinha() {
-  return (
-    <section className="px-5 pb-14">
-      <div className="mx-auto flex max-w-2xl flex-col gap-4 rounded-3xl border border-border bg-card p-6 shadow-soft sm:flex-row sm:items-center sm:justify-between">
-        <div className="min-w-0">
-          <h2 className="text-lg font-semibold">Prefere contribuir pela Vakinha?</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Também temos nossa campanha na Vakinha para quem prefere utilizar uma plataforma de
-            arrecadação.
-          </p>
-        </div>
-        <a
-          href={campaign.vakinhaUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => track("click_vakinha")}
-          className="inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl border border-primary px-5 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary-soft"
-        >
-          Ver campanha na Vakinha <ArrowUpRight className="h-4 w-4" />
-        </a>
       </div>
     </section>
   );
@@ -426,15 +360,6 @@ export function Rodape() {
           </a>
           <a href="#como-ajudar" className="hover:text-primary">
             Como ajudar
-          </a>
-          <a
-            href={campaign.vakinhaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("click_vakinha")}
-            className="hover:text-primary"
-          >
-            Vakinha
           </a>
         </nav>
       </div>

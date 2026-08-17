@@ -23,14 +23,6 @@ export const campaign = {
   /** Valores sugeridos no modal (em reais) */
   valoresSugeridos: [20, 50, 100, 200],
 
-  /** Progresso — atualize manualmente ou conecte a um banco de dados depois */
-  progresso: {
-    arrecadado: 22102 as number | null,
-    meta: 100000 as number | null,
-    atualizadoEm: "17/08/2026",
-  },
-
-  vakinhaUrl: "https://www.vakinha.com.br/vaquinha/danelle-isabela-contra-o-cancer-ajude-nos-a-continuar-o-tratamento",
 
   situacao: {
     titulo: "Por que estamos pedindo ajuda?",
@@ -53,8 +45,28 @@ export const campaign = {
   /** Fotos reais fornecidas pela família. Deixe [] enquanto não houver fotos. */
   fotos: [
     {
-      src: "https://static.vakinha.com.br/uploads/vakinha/image/6272380/1786902098.22.jpg?ims=700x410",
+      src: "/images/foto-principal.jpg",
       legenda: "Danelle Isabella Bastos César",
+    },
+    {
+      src: "/images/foto-1.jpg",
+      legenda: "Danelle com o esposo e os filhos",
+    },
+    {
+      src: "/images/foto-2.jpg",
+      legenda: "Momento em família comemorando aniversário",
+    },
+    {
+      src: "/images/foto-3.jpg",
+      legenda: "Danelle com seu esposo e filhos",
+    },
+    {
+      src: "/images/foto-4.jpg",
+      legenda: "Danelle e sua linda família",
+    },
+    {
+      src: "/images/foto-5.jpg",
+      legenda: "Família reunida comemorando aniversário",
     },
   ] as { src: string; legenda?: string }[],
 
@@ -78,7 +90,7 @@ export const campaign = {
 
   transparencia: {
     itens: [
-      "Prestação de contas: Todas as doações recebidas via PIX pessoal ou Vakinha serão documentadas de forma transparente.",
+      "Prestação de contas: Todas as doações recebidas via PIX pessoal serão documentadas de forma transparente.",
       "Uso dos recursos: Os fundos serão destinados exclusivamente a exames, consultas, medicamentos de suporte, terapias e custos de locomoção.",
       "Atualizações médicas: Compartilharemos a evolução do tratamento e as orientações da equipe médica.",
     ],

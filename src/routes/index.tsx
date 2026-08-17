@@ -10,11 +10,9 @@ import {
   Galeria,
   Hero,
   Historia,
-  Progresso,
   Rodape,
   Situacao,
   Transparencia,
-  Vakinha,
 } from "@/components/campaign/Sections";
 import { initScrollTracking, track } from "@/lib/analytics";
 
@@ -59,9 +57,7 @@ function Index() {
       <Historia />
       <Galeria />
       <Transparencia />
-      <Progresso />
       <Atualizacoes />
-      <Vakinha />
       <Compartilhar />
       <CtaFinal onDonate={abrirModal} />
       <Rodape />
