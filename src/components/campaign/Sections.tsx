@@ -326,7 +326,8 @@ export function Vakinha() {
 
 export function Compartilhar() {
   const [copiado, setCopiado] = useState(false);
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  const [url, setUrl] = useState("");
+  useEffect(() => setUrl(window.location.href), []);
   const msg = `${campaign.mensagemCompartilhamento} ${url}`;
 
   const copiarLink = async () => {
