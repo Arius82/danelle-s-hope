@@ -326,11 +326,14 @@ export function Vakinha() {
 
 export function Compartilhar() {
   const [copiado, setCopiado] = useState(false);
-  const [url, setUrl] = useState("");
-  useEffect(() => setUrl(window.location.href), []);
-  const msg = `${campaign.mensagemCompartilhamento} ${url}`;
+  const compartilharWhatsApp = () => {
+    const msg = `${campaign.mensagemCompartilhamento} ${window.location.href}`;
+    track("click_whatsapp");
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  };
 
   const copiarLink = async () => {
+    const url = window.location.href;
     try {
       await navigator.clipboard.writeText(url);
       setCopiado(true);
@@ -351,15 +354,12 @@ export function Compartilhar() {
           Se você não puder contribuir agora, compartilhar esta página já é uma grande ajuda.
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          <a
-            href={`https://wa.me/?text=${encodeURIComponent(msg)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("click_whatsapp")}
+          <button
+            onClick={compartilharWhatsApp}
             className="flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-4 text-sm font-semibold text-primary-foreground"
           >
             <MessageCircle className="h-4 w-4" /> WhatsApp
-          </a>
+          </button>
           <a
             href="https://www.instagram.com/"
             target="_blank"
