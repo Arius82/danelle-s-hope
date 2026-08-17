@@ -1,24 +1,72 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useCallback, useEffect, useState } from "react";
+import { DonationModal } from "@/components/campaign/DonationModal";
+import {
+  Atualizacoes,
+  BotaoFixo,
+  ComoAjuda,
+  Compartilhar,
+  CtaFinal,
+  Galeria,
+  Hero,
+  Historia,
+  Progresso,
+  Rodape,
+  Situacao,
+  Transparencia,
+  Vakinha,
+} from "@/components/campaign/Sections";
+import { initScrollTracking, track } from "@/lib/analytics";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "Ajude Danelle na luta contra o câncer";
+const DESCRIPTION =
+  "Conheça a história da Danelle e saiba como ajudar nossa família durante seu tratamento contra o câncer.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:locale", content: "pt_BR" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [modalAberto, setModalAberto] = useState(false);
+
+  const abrirModal = useCallback(() => {
+    track("click_quero_ajudar");
+    setModalAberto(true);
+  }, []);
+
+  useEffect(() => initScrollTracking(), []);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="min-h-screen bg-background">
+      <Hero onDonate={abrirModal} />
+      <Situacao onDonate={abrirModal} />
+      <ComoAjuda />
+      <Historia />
+      <Galeria />
+      <Transparencia />
+      <Progresso />
+      <Atualizacoes />
+      <Vakinha />
+      <Compartilhar />
+      <CtaFinal onDonate={abrirModal} />
+      <Rodape />
+      <BotaoFixo onDonate={abrirModal} />
+      <DonationModal open={modalAberto} onClose={() => setModalAberto(false)} />
+    </main>
   );
 }
