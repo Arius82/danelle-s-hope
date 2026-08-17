@@ -96,6 +96,23 @@ export const campaign = {
     ],
   },
 
+  documentos: [
+    {
+      titulo: "Laudo Histopatológico (Biópsia)",
+      data: "05/06/2026",
+      emissor: "CEDAPP - Centro de Diagnóstico Anatomopatológico",
+      descricao: "Laudo de estudo imuno-histoquímico confirmando o diagnóstico de carcinoma metaplásico da mama esquerda, grau III (triplo-negativo) com índice de proliferação celular (Ki-67) de 90%.",
+      url: "/documents/laudo-histopatologico.pdf",
+    },
+    {
+      titulo: "Laudo de Exame PET/CT",
+      data: "27/07/2026",
+      emissor: "Nova Diagnóstico por Imagem",
+      descricao: "Mapeamento corporal completo demonstrando lesões hipermetabólicas compatíveis com o quadro metastático da doença nos ossos, fígado, pulmões e linfonodos.",
+      url: "/documents/laudo-petscan.jpg",
+    },
+  ],
+
   mensagemCompartilhamento:
     "Oi! Estou ajudando na campanha da Danelle, que está enfrentando um câncer. Se puder contribuir ou compartilhar, já será uma grande ajuda. ❤️",
 };

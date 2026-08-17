@@ -226,6 +226,57 @@ export function Transparencia() {
             </li>
           ))}
         </ul>
+
+        {campaign.documentos && campaign.documentos.length > 0 ? (
+          <>
+            <h3 className="mt-10 text-xl font-semibold text-foreground">
+              Documentos e Laudos Médicos
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Abaixo estão os laudos oficiais que atestam o quadro clínico e fundamentam a campanha.
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {campaign.documentos.map((doc) => (
+                <div
+                  key={doc.titulo}
+                  className="flex flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-soft hover:shadow-lift transition-all duration-300"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-semibold text-primary uppercase tracking-wider bg-primary/10 px-2.5 py-0.5 rounded-full">
+                        {doc.data}
+                      </span>
+                    </div>
+                    <h4 className="mt-3 text-base font-semibold text-foreground leading-snug">
+                      {doc.titulo}
+                    </h4>
+                    <p className="mt-1 text-xs text-muted-foreground font-medium">{doc.emissor}</p>
+                    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                      {doc.descricao}
+                    </p>
+                  </div>
+                  <div className="mt-5 flex gap-2">
+                    <a
+                      href={doc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-1 rounded-xl bg-primary px-3 py-2.5 text-center text-xs font-bold text-primary-foreground transition-all hover:brightness-105 active:scale-[0.98]"
+                    >
+                      Visualizar <ArrowUpRight className="h-3 w-3" />
+                    </a>
+                    <a
+                      href={doc.url}
+                      download
+                      className="flex-1 inline-flex items-center justify-center gap-1 rounded-xl border border-border bg-secondary px-3 py-2.5 text-center text-xs font-semibold text-secondary-foreground transition-all hover:bg-muted active:scale-[0.98]"
+                    >
+                      {doc.url.endsWith(".pdf") ? "Baixar PDF" : "Baixar Imagem"}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : null}
       </div>
     </section>
   );
