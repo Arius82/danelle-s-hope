@@ -22,7 +22,7 @@ export function Hero({ onDonate }: { onDonate: () => void }) {
     <header id="inicio" className="bg-warm px-5 pt-10 pb-12 sm:pt-16">
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 md:items-center">
         <div className="aspect-[4/5] overflow-hidden rounded-3xl shadow-lift sm:aspect-[4/3] md:aspect-[4/5]">
-          <PhotoFrame alt="Danelle" label="Foto da Danelle" />
+          <PhotoFrame src={campaign.fotos[0]?.src} alt="Danelle" label="Foto da Danelle" />
         </div>
         <div>
           <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
@@ -37,7 +37,7 @@ export function Hero({ onDonate }: { onDonate: () => void }) {
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <button
               onClick={onDonate}
-              className="rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-soft transition-transform active:scale-[0.99]"
+              className="rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-soft transition-transform active:scale-[0.99] animate-heartbeat hover:brightness-105"
             >
               ❤️ QUERO AJUDAR DANELLE
             </button>
@@ -71,7 +71,7 @@ export function Situacao({ onDonate }: { onDonate: () => void }) {
         </p>
         <button
           onClick={onDonate}
-          className="mt-7 w-full rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-soft transition-transform active:scale-[0.99] sm:w-auto"
+          className="mt-7 w-full rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-soft transition-transform active:scale-[0.99] animate-heartbeat hover:brightness-105 sm:w-auto"
         >
           ❤️ Quero ajudar
         </button>
@@ -120,7 +120,7 @@ export function Historia() {
     <section id="historia" className="px-5 py-14" aria-labelledby="historia-titulo">
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1fr_1.1fr] md:items-start">
         <div className="aspect-[4/5] overflow-hidden rounded-3xl shadow-soft md:sticky md:top-8">
-          <PhotoFrame alt="Danelle com a família" label="Foto real da Danelle" />
+          <PhotoFrame src={campaign.fotos[0]?.src} alt="Danelle com a família" label="Foto real da Danelle" />
         </div>
         <div>
           <h2 id="historia-titulo" className="text-2xl font-semibold sm:text-3xl">
@@ -214,21 +214,26 @@ export function Progresso() {
         <h2 id="progresso" className="text-2xl font-semibold">
           Progresso da campanha
         </h2>
-        <div className="mt-5 grid grid-cols-2 gap-4">
+        <div className="mt-5 grid grid-cols-3 gap-4 items-end">
           <div>
             <p className="text-sm text-muted-foreground">Já arrecadamos</p>
             <p className="text-2xl font-bold text-primary">
               {arrecadado !== null ? brl(arrecadado) : "R$ [VALOR ATUAL]"}
             </p>
           </div>
+          <div className="text-center pb-1">
+            <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+              {pct}% atingido
+            </span>
+          </div>
           <div className="text-right">
             <p className="text-sm text-muted-foreground">Meta</p>
             <p className="text-2xl font-bold">{meta !== null ? brl(meta) : "R$ [META]"}</p>
           </div>
         </div>
-        <div className="mt-4 h-3 w-full overflow-hidden rounded-full bg-muted">
+        <div className="mt-4 h-4 w-full overflow-hidden rounded-full bg-muted relative shadow-inner">
           <div
-            className="h-full rounded-full bg-primary transition-[width] duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-primary to-emerald-400 transition-[width] duration-500 relative"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -394,7 +399,7 @@ export function CtaFinal({ onDonate }: { onDonate: () => void }) {
         </p>
         <button
           onClick={onDonate}
-          className="mt-7 w-full rounded-2xl bg-primary px-8 py-5 text-lg font-bold text-primary-foreground shadow-lift transition-transform active:scale-[0.99] sm:w-auto"
+          className="mt-7 w-full rounded-2xl bg-primary px-8 py-5 text-lg font-bold text-primary-foreground shadow-lift transition-transform active:scale-[0.99] animate-heartbeat hover:brightness-105 sm:w-auto"
         >
           ❤️ QUERO AJUDAR DANELLE
         </button>
@@ -442,7 +447,7 @@ export function BotaoFixo({ onDonate }: { onDonate: () => void }) {
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur md:hidden">
       <button
         onClick={onDonate}
-        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground"
+        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground animate-heartbeat hover:brightness-105"
       >
         <Copy className="hidden" aria-hidden />❤️ AJUDAR DANELLE
       </button>

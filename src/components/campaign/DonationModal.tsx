@@ -114,16 +114,16 @@ export function DonationModal({ open, onClose }: Props) {
           O valor escolhido é apenas uma sugestão — você digita o valor final no seu banco.
         </p>
 
-        <div className="mt-6 rounded-2xl border border-primary/25 bg-primary-soft/60 p-4">
-          <p className="text-sm font-semibold">PIX da {campaign.beneficiaria}</p>
+        <div className="mt-6 rounded-2xl border border-primary/25 bg-primary-soft/60 p-4 text-center">
+          <p className="text-sm font-semibold text-foreground">PIX da {campaign.beneficiaria}</p>
           <p
-            className="mt-2 rounded-xl border border-border bg-card px-3 py-3 font-mono text-sm break-all select-all"
+            className="mt-2 rounded-xl border border-border bg-card px-3 py-3 font-mono text-base font-bold tracking-wider break-all select-all text-center text-primary"
             data-testid="chave-pix"
           >
-            {campaign.pix.chave}
+            {campaign.pix.chave === "81986775698" ? "(81) 98677-5698" : campaign.pix.chave}
           </p>
           <p className="mt-2 text-xs text-muted-foreground">
-            Titular: {campaign.pix.titular} · {campaign.pix.banco}
+            Chave Celular · Titular: {campaign.pix.titular}
           </p>
           <button
             onClick={copiarPix}
