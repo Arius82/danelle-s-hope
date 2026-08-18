@@ -28,8 +28,12 @@ export function Hero({ onDonate }: { onDonate: () => void }) {
           <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
             Campanha de apoio à {campaign.beneficiaria}
           </p>
-          <h1 className="mt-3 text-3xl leading-tight font-semibold sm:text-4xl md:text-5xl">
-            {campaign.titulo}
+          <h1 className="mt-3 text-3xl leading-tight font-semibold sm:text-4xl md:text-5xl text-foreground">
+            Ajude Danelle na luta{" "}
+            <span className="relative inline-block">
+              <span className="absolute -inset-x-2 -inset-y-0.5 rounded-lg bg-primary/10 -rotate-1" aria-hidden />
+              <span className="relative text-primary font-bold">contra o câncer</span>
+            </span>
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             {campaign.subtitulo}

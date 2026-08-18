@@ -8,7 +8,7 @@ import { triggerConfetti } from "@/lib/confetti";
 type Props = { open: boolean; onClose: () => void };
 
 export function DonationModal({ open, onClose }: Props) {
-  const [valor, setValor] = useState<number | "outro" | null>(null);
+  const [valor, setValor] = useState<number | "outro" | null>(50);
   const [customValor, setCustomValor] = useState<string>("");
   const [copiado, setCopiado] = useState(false);
 
@@ -152,6 +152,48 @@ export function DonationModal({ open, onClose }: Props) {
             ? "O código PIX abaixo será atualizado automaticamente com o valor digitado."
             : "O valor selecionado será preenchido automaticamente ao copiar o código abaixo."}
         </p>
+
+        {/* Passo a Passo do PIX */}
+        <div className="mt-5 rounded-2xl border border-border bg-muted/30 p-4">
+          <p className="text-xs font-bold text-foreground uppercase tracking-wider text-center mb-3">
+            Como funciona a doação por PIX:
+          </p>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="flex flex-col items-center">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                1
+              </span>
+              <span className="mt-2 text-[10px] font-semibold text-foreground leading-tight">
+                Copiar o Código
+              </span>
+              <span className="mt-1 text-[9px] text-muted-foreground leading-normal">
+                Clique no botão verde abaixo.
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                2
+              </span>
+              <span className="mt-2 text-[10px] font-semibold text-foreground leading-tight">
+                Abrir o Banco
+              </span>
+              <span className="mt-1 text-[9px] text-muted-foreground leading-normal">
+                Escolha "PIX Copia e Cola".
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                3
+              </span>
+              <span className="mt-2 text-[10px] font-semibold text-foreground leading-tight">
+                Colar e Pagar
+              </span>
+              <span className="mt-1 text-[9px] text-muted-foreground leading-normal">
+                Cole o código e confirme o nome.
+              </span>
+            </div>
+          </div>
+        </div>
 
         <div className="mt-6 rounded-2xl border border-primary/25 bg-primary-soft/60 p-4 text-center">
           <p className="text-sm font-semibold text-foreground">Código PIX Copia e Cola</p>
