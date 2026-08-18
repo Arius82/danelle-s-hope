@@ -32,6 +32,18 @@ export const campaign = {
       "O carcinoma metaplásico possui um alto índice de proliferação (Ki-67 de 90%, grau III, triplo-negativo), o que significa que as células tumorais se multiplicam muito rápido. Isso exige uma resposta médica rápida e coordenada, além de cuidados intensivos diários.",
   },
 
+  fichaClinica: {
+    titulo: "Resumo Clínico da Paciente",
+    subtitulo: "Ficha médica consolidada a partir dos exames e laudos anexos:",
+    detalhes: [
+      { rotulo: "Diagnóstico", valor: "Carcinoma Metaplásico Invasivo de Mama (Grau III)" },
+      { rotulo: "Subtipo Molecular", valor: "Triplo-Negativo (Ki-67: 90% - Alta proliferação)" },
+      { rotulo: "Evolução Médica", valor: "Quadro Metastático (Fígado, Pulmão, Ossos e Linfonodos)" },
+      { rotulo: "Complicações Recentes", valor: "Múltiplas lesões hepáticas e presença de ascite" },
+      { rotulo: "Ação Imediata", valor: "Tratamento Sistêmico Urgente e Acompanhamento Oncológico" },
+    ],
+  },
+
   historia: {
     titulo: "A história da Danelle",
     paragrafos: [

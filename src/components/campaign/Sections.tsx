@@ -80,6 +80,41 @@ export function Situacao({ onDonate }: { onDonate: () => void }) {
   );
 }
 
+export function FichaClinica() {
+  const { titulo, subtitulo, detalhes } = campaign.fichaClinica;
+  return (
+    <section className="bg-card/75 px-5 py-12 border-y border-border/60 backdrop-blur-sm" aria-labelledby="ficha-clinica">
+      <div className="mx-auto max-w-2xl">
+        <div className="flex items-center gap-3">
+          <span className="text-xl inline-flex items-center justify-center h-8 w-8 rounded-lg bg-primary/10 text-primary" aria-hidden>
+            📋
+          </span>
+          <h2 id="ficha-clinica" className="text-xl font-bold sm:text-2xl text-foreground">
+            {titulo}
+          </h2>
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {subtitulo}
+        </p>
+        <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-background shadow-soft">
+          <dl className="divide-y divide-border">
+            {detalhes.map((item, idx) => (
+              <div key={idx} className="grid grid-cols-1 p-4 sm:grid-cols-3 sm:gap-4 sm:px-6 hover:bg-muted/30 transition-colors">
+                <dt className="text-xs font-semibold uppercase tracking-wider text-primary sm:py-0.5">
+                  {item.rotulo}
+                </dt>
+                <dd className="mt-1 text-sm font-bold text-foreground sm:col-span-2 sm:mt-0">
+                  {item.valor}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const ajudas = [
   { icone: "🏥", titulo: "Tratamento", texto: "Consultas, procedimentos e acompanhamento médico." },
   { icone: "💊", titulo: "Medicamentos", texto: "Medicamentos e itens necessários durante o tratamento." },

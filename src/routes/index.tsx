@@ -8,6 +8,7 @@ import {
   Compartilhar,
   CtaFinal,
   Galeria,
+  FichaClinica,
   Hero,
   Historia,
   Rodape,
@@ -50,9 +51,15 @@ function Index() {
   useEffect(() => initScrollTracking(), []);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background relative overflow-hidden">
+      {/* Background blobs for premium glassmorphism feel */}
+      <div className="absolute top-[10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-blob-warm pointer-events-none filter blur-2xl" />
+      <div className="absolute top-[35%] right-[-10%] h-[600px] w-[600px] rounded-full bg-blob-green pointer-events-none filter blur-3xl" />
+      <div className="absolute bottom-[20%] left-[-15%] h-[550px] w-[550px] rounded-full bg-blob-warm pointer-events-none filter blur-2xl" />
+
       <Hero onDonate={abrirModal} />
       <Situacao onDonate={abrirModal} />
+      <FichaClinica />
       <ComoAjuda />
       <Historia />
       <Galeria />

@@ -3,6 +3,7 @@ import { Check, Copy, QrCode, X } from "lucide-react";
 import { campaign } from "@/data/campaign";
 import { track } from "@/lib/analytics";
 import { generatePixPayload } from "@/lib/pix";
+import { triggerConfetti } from "@/lib/confetti";
 
 type Props = { open: boolean; onClose: () => void };
 
@@ -56,6 +57,7 @@ export function DonationModal({ open, onClose }: Props) {
       document.body.removeChild(el);
     }
     setCopiado(true);
+    triggerConfetti();
     track("copiar_pix", { valor: activeAmount });
   };
 
