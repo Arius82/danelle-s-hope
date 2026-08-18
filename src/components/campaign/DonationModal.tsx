@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Check, Copy, QrCode, X } from "lucide-react";
 import { campaign } from "@/data/campaign";
 import { track } from "@/lib/analytics";
+import { generatePixPayload } from "@/lib/pix";
 
 type Props = { open: boolean; onClose: () => void };
 
 export function DonationModal({ open, onClose }: Props) {
   const [valor, setValor] = useState<number | "outro" | null>(null);
+  const [customValor, setCustomValor] = useState<string>("");
   const [copiado, setCopiado] = useState(false);
 
   useEffect(() => {
@@ -30,13 +32,22 @@ export function DonationModal({ open, onClose }: Props) {
 
   if (!open) return null;
 
+  const activeAmount = valor === "outro" ? parseFloat(customValor) || 0 : valor || 0;
+
+  const payload = generatePixPayload({
+    key: campaign.pix.chave,
+    name: campaign.pix.titular,
+    city: "JOAO PESSOA",
+    amount: activeAmount,
+  });
+
   const copiarPix = async () => {
-    const chave = campaign.pix.chave;
+    const textToCopy = payload || campaign.pix.chave;
     try {
-      await navigator.clipboard.writeText(chave);
+      await navigator.clipboard.writeText(textToCopy);
     } catch {
       const el = document.createElement("textarea");
-      el.value = chave;
+      el.value = textToCopy;
       el.style.position = "fixed";
       el.style.opacity = "0";
       document.body.appendChild(el);
@@ -45,7 +56,7 @@ export function DonationModal({ open, onClose }: Props) {
       document.body.removeChild(el);
     }
     setCopiado(true);
-    track("copiar_pix", { valor });
+    track("copiar_pix", { valor: activeAmount });
   };
 
   return (
@@ -66,8 +77,7 @@ export function DonationModal({ open, onClose }: Props) {
               Como você gostaria de ajudar?
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Qualquer valor pode fazer diferença. Sua contribuição será enviada diretamente para{" "}
-              {campaign.beneficiaria}.
+              Sua contribuição será enviada diretamente para a conta bancária da {campaign.beneficiaria}.
             </p>
           </div>
           <button
@@ -99,6 +109,7 @@ export function DonationModal({ open, onClose }: Props) {
           <button
             onClick={() => {
               setValor("outro");
+              setCustomValor("");
               track("selecionar_valor", { valor: "outro" });
             }}
             className={`col-span-2 rounded-xl border px-3 py-3 text-base font-semibold transition-colors ${
@@ -110,24 +121,44 @@ export function DonationModal({ open, onClose }: Props) {
             Outro valor
           </button>
         </div>
+
+        {valor === "outro" && (
+          <div className="mt-4">
+            <label htmlFor="custom-amount" className="text-sm font-semibold text-foreground">
+              Digite o valor da doação:
+            </label>
+            <div className="relative mt-2 rounded-xl shadow-inner">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-muted-foreground font-semibold">
+                R$
+              </span>
+              <input
+                id="custom-amount"
+                type="number"
+                min="1"
+                step="any"
+                value={customValor}
+                onChange={(e) => setCustomValor(e.target.value)}
+                className="w-full rounded-xl border border-border bg-card py-3 pl-10 pr-4 font-semibold outline-none focus:border-primary transition-colors"
+                placeholder="0,00"
+              />
+            </div>
+          </div>
+        )}
+
         <p className="mt-2 text-xs text-muted-foreground">
-          O valor escolhido é apenas uma sugestão — você digita o valor final no seu banco.
+          {valor === "outro"
+            ? "O código PIX abaixo será atualizado automaticamente com o valor digitado."
+            : "O valor selecionado será preenchido automaticamente ao copiar o código abaixo."}
         </p>
 
         <div className="mt-6 rounded-2xl border border-primary/25 bg-primary-soft/60 p-4 text-center">
-          <p className="text-sm font-semibold text-foreground">PIX da {campaign.beneficiaria}</p>
-          <p
-            className="mt-2 rounded-xl border border-border bg-card px-3 py-3 font-mono text-base font-bold tracking-wider break-all select-all text-center text-primary"
-            data-testid="chave-pix"
-          >
-            {campaign.pix.chave === "81986775698" ? "(81) 98677-5698" : campaign.pix.chave}
-          </p>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Chave Celular · Titular: {campaign.pix.titular}
-          </p>
+          <p className="text-sm font-semibold text-foreground">Código PIX Copia e Cola</p>
+          <div className="mt-2 rounded-xl border border-border bg-card px-3 py-3 font-mono text-xs text-primary max-h-16 overflow-y-auto whitespace-pre-wrap break-all select-all text-left">
+            {payload}
+          </div>
           <button
             onClick={copiarPix}
-            className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-4 text-base font-bold text-primary-foreground transition-transform active:scale-[0.99]"
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-4 text-base font-bold text-primary-foreground transition-transform active:scale-[0.99] shadow-soft hover:brightness-105"
           >
             {copiado ? (
               <>
@@ -135,32 +166,42 @@ export function DonationModal({ open, onClose }: Props) {
               </>
             ) : (
               <>
-                <Copy className="h-5 w-5" /> COPIAR PIX
+                <Copy className="h-5 w-5" /> COPIAR CÓDIGO PIX
               </>
             )}
           </button>
         </div>
 
         <div className="mt-5 flex flex-col items-center gap-3">
-          <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border bg-warm">
-            {campaign.pix.qrCodeSrc ? (
+          <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border bg-warm p-1 shadow-inner">
+            {payload ? (
               <img
-                src={campaign.pix.qrCodeSrc}
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(payload)}`}
                 alt={`QR Code do PIX da ${campaign.beneficiaria}`}
                 loading="lazy"
-                className="h-full w-full object-contain"
+                className="h-full w-full object-contain animate-fade-in"
               />
             ) : (
               <div className="flex flex-col items-center gap-2 p-4 text-center">
                 <QrCode className="h-7 w-7 text-muted-foreground" aria-hidden />
                 <span className="text-xs text-muted-foreground">
-                  Espaço para o QR Code do PIX
+                  Selecione ou digite um valor...
                 </span>
               </div>
             )}
           </div>
-          <p className="text-center text-sm text-muted-foreground">
-            Prefere usar o celular para pagar? Aponte a câmera para o QR Code.
+          <p className="text-center text-xs text-muted-foreground max-w-[280px]">
+            Aponte a câmera do aplicativo do seu banco para o QR Code acima. O valor será preenchido automaticamente.
+          </p>
+        </div>
+
+        <div className="mt-5 border-t border-border pt-4 text-center">
+          <p className="text-xs font-semibold text-muted-foreground">Caso prefira digitar os dados manualmente:</p>
+          <p className="mt-1 text-sm font-bold text-foreground">
+            Chave Celular: {campaign.pix.chave === "81986775698" ? "(81) 98677-5698" : campaign.pix.chave}
+          </p>
+          <p className="text-[10px] text-muted-foreground mt-0.5">
+            Titular: {campaign.pix.titular} · {campaign.pix.banco}
           </p>
         </div>
 
