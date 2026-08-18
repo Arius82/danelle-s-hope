@@ -102,7 +102,7 @@ export const campaign = {
 
   transparencia: {
     itens: [
-      "Prestação de contas: Todas as doações recebidas via PIX pessoal serão documentadas de forma transparente.",
+      "Comprovação médica: Disponibilizamos os laudos oficiais de exames e biópsia diretamente nesta página para certificar o diagnóstico e a gravidade do caso.",
       "Uso dos recursos: Os fundos serão destinados exclusivamente a exames, consultas, medicamentos de suporte, terapias e custos de locomoção.",
       "Atualizações médicas: Compartilharemos a evolução do tratamento e as orientações da equipe médica.",
     ],
