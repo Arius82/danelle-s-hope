@@ -27,16 +27,16 @@ export const campaign = {
   situacao: {
     titulo: "Por que estamos pedindo ajuda?",
     texto:
-      "Danelle tem 40 anos e está enfrentando um carcinoma metaplásico invasivo da mama, um tipo raro e muito agressivo de câncer. Após passar por uma mastectomia, a doença infelizmente evoluiu para um quadro metastático, atingindo o fígado, pulmões, ossos e linfonodos. Recentemente, exames apontaram múltiplas lesões hepáticas e a presença de ascite, exigindo acompanhamento oncológico constante e tratamento sistêmico imediato.",
+      "Danelle tem 40 anos e está enfrentando um carcinoma metaplásico invasivo da mama com extensa diferenciação escamosa, um tipo raro e muito agressivo de câncer. A quimioterapia convencional costuma ter eficácia limitada e menor taxa de resposta neste tipo de tumor em comparação aos tumores de mama comuns. Após passar por uma mastectomia, a doença infelizmente evoluiu para um quadro metastático, atingindo o fígado, pulmões, ossos e linfonodos. Recentemente, exames apontaram múltiplas lesões hepáticas e a presença de ascite, exigindo acompanhamento oncológico constante e tratamento sistêmico imediato.",
     detalhes:
-      "O carcinoma metaplásico possui um alto índice de proliferação (Ki-67 de 90%, grau III, triplo-negativo), o que significa que as células tumorais se multiplicam muito rápido. Isso exige uma resposta médica rápida e coordenada, além de cuidados intensivos diários.",
+      "O carcinoma metaplásico com diferenciação escamosa possui um alto índice de proliferação (Ki-67 de 90%, grau III, triplo-negativo). A baixa eficácia da quimioterapia tradicional exige uma resposta médica rápida e a busca por tratamentos sistêmicos alternativos e de suporte contínuo.",
   },
 
   fichaClinica: {
     titulo: "Resumo Clínico da Paciente",
     subtitulo: "Ficha médica consolidada a partir dos exames e laudos anexos:",
     detalhes: [
-      { rotulo: "Diagnóstico", valor: "Carcinoma Metaplásico Invasivo de Mama (Grau III)" },
+      { rotulo: "Diagnóstico", valor: "Carcinoma Metaplásico Invasivo com Extensa Diferenciação Escamosa (Grau III)" },
       { rotulo: "Subtipo Molecular", valor: "Triplo-Negativo (Ki-67: 90% - Alta proliferação)" },
       { rotulo: "Evolução Médica", valor: "Quadro Metastático (Fígado, Pulmão, Ossos e Linfonodos)" },
       { rotulo: "Complicações Recentes", valor: "Múltiplas lesões hepáticas e presença de ascite" },
@@ -113,7 +113,7 @@ export const campaign = {
       titulo: "Laudo Histopatológico (Biópsia)",
       data: "05/06/2026",
       emissor: "CEDAPP - Centro de Diagnóstico Anatomopatológico",
-      descricao: "Laudo de estudo imuno-histoquímico confirmando o diagnóstico de carcinoma metaplásico da mama esquerda, grau III (triplo-negativo) com índice de proliferação celular (Ki-67) de 90%.",
+      descricao: "Laudo de estudo imuno-histoquímico confirmando o diagnóstico de carcinoma metaplásico da mama esquerda com extensa diferenciação escamosa, grau III (triplo-negativo) com índice de proliferação celular (Ki-67) de 90%.",
       url: "/documents/laudo-histopatologico.pdf",
     },
     {
