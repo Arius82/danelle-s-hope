@@ -15,7 +15,7 @@ export const campaign = {
   pix: {
     chave: "81986775698",
     titular: "Danelle Isabella Bastos César",
-    banco: "Mercado Pago / Banco do Brasil / Nubank", // standard/flexible
+    banco: "Bradesco",
     /** Coloque a imagem do QR Code em public/images/qrcode-pix.png e informe o caminho aqui */
     qrCodeSrc: "" as string,
   },
