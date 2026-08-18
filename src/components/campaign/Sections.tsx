@@ -419,13 +419,34 @@ export function Rodape() {
 }
 
 export function BotaoFixo({ onDonate }: { onDonate: () => void }) {
+  const [visivel, setVisivel] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setVisivel(true);
+      } else {
+        setVisivel(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur md:hidden">
+    <div
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur transition-all duration-300 md:inset-x-auto md:bottom-8 md:right-8 md:left-auto md:border-none md:bg-transparent md:p-0 md:backdrop-blur-none ${
+        visivel
+          ? "translate-y-0 opacity-100 scale-100"
+          : "translate-y-20 opacity-0 scale-90 pointer-events-none md:translate-y-10"
+      }`}
+    >
       <button
         onClick={onDonate}
-        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground animate-heartbeat hover:brightness-105"
+        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground animate-heartbeat hover:brightness-105 shadow-lift md:w-auto md:rounded-full md:px-8 md:py-4"
       >
-        <Copy className="hidden" aria-hidden />❤️ AJUDAR DANELLE
+        <Copy className="hidden" aria-hidden />❤️ QUERO AJUDAR DANELLE
       </button>
     </div>
   );
