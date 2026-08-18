@@ -13,11 +13,34 @@ import {
 import { campaign } from "@/data/campaign";
 import { track } from "@/lib/analytics";
 import { PhotoFrame } from "./PhotoFrame";
+import { triggerConfetti } from "@/lib/confetti";
 
 const brl = (n: number) =>
   n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 
 export function Hero({ onDonate }: { onDonate: () => void }) {
+  const [copiado, setCopiado] = useState(false);
+
+  const copiarChaveRapido = async () => {
+    const chave = campaign.pix.chave;
+    try {
+      await navigator.clipboard.writeText(chave);
+    } catch {
+      const el = document.createElement("textarea");
+      el.value = chave;
+      el.style.position = "fixed";
+      el.style.opacity = "0";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+    setCopiado(true);
+    triggerConfetti();
+    track("copiar_pix", { valor: 0, origem: "hero_quick" });
+    setTimeout(() => setCopiado(false), 2500);
+  };
+
   return (
     <header id="inicio" className="bg-warm px-5 pt-10 pb-12 sm:pt-16">
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 md:items-center">
@@ -38,16 +61,30 @@ export function Hero({ onDonate }: { onDonate: () => void }) {
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             {campaign.subtitulo}
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <button
               onClick={onDonate}
-              className="rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-soft transition-transform active:scale-[0.99] animate-heartbeat hover:brightness-105"
+              className="rounded-2xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-soft transition-all hover:brightness-105 active:scale-[0.98] animate-heartbeat"
             >
               ❤️ QUERO AJUDAR DANELLE
             </button>
+            <button
+              onClick={copiarChaveRapido}
+              className="rounded-2xl border border-border bg-card px-6 py-4 text-center text-base font-semibold transition-all hover:bg-muted active:scale-[0.98] flex items-center justify-center gap-2"
+            >
+              {copiado ? (
+                <>
+                  <Check className="h-4 w-4 text-primary" /> Chave Copiada!
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4 text-muted-foreground" /> Copiar Chave PIX
+                </>
+              )}
+            </button>
             <a
               href="#historia"
-              className="rounded-2xl border border-border bg-card px-6 py-4 text-center text-base font-semibold transition-colors hover:bg-muted"
+              className="rounded-2xl border border-border bg-card px-6 py-4 text-center text-base font-semibold transition-all hover:bg-muted active:scale-[0.98] flex items-center justify-center"
             >
               Conheça a história
             </a>

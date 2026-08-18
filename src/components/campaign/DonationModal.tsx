@@ -99,10 +99,10 @@ export function DonationModal({ open, onClose }: Props) {
                 setValor(v);
                 track("selecionar_valor", { valor: v });
               }}
-              className={`rounded-xl border px-3 py-3 text-base font-semibold transition-colors ${
+              className={`rounded-xl border px-3 py-3 text-base font-bold transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm hover:shadow-md ${
                 valor === v
                   ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-secondary text-secondary-foreground hover:border-primary"
+                  : "border-border bg-secondary text-secondary-foreground hover:border-primary hover:bg-muted/50"
               }`}
             >
               R$ {v}
@@ -114,10 +114,10 @@ export function DonationModal({ open, onClose }: Props) {
               setCustomValor("");
               track("selecionar_valor", { valor: "outro" });
             }}
-            className={`col-span-2 rounded-xl border px-3 py-3 text-base font-semibold transition-colors ${
+            className={`col-span-2 rounded-xl border px-3 py-3 text-base font-bold transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm hover:shadow-md ${
               valor === "outro"
                 ? "border-primary bg-primary text-primary-foreground"
-                : "border-border bg-secondary text-secondary-foreground hover:border-primary"
+                : "border-border bg-secondary text-secondary-foreground hover:border-primary hover:bg-muted/50"
             }`}
           >
             Outro valor
