@@ -1,11 +1,11 @@
 import { ImageIcon } from "lucide-react";
 
 type Props = {
-  src?: string;
+  src?: string | undefined;
   alt: string;
-  label?: string;
-  className?: string;
-  onClick?: () => void;
+  label?: string | undefined;
+  className?: string | undefined;
+  onClick?: (() => void) | undefined;
 };
 
 /**

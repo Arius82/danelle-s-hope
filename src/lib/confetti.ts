@@ -54,7 +54,7 @@ export function triggerConfetti() {
       x: width / 2 + (Math.random() - 0.5) * 50,
       y: height + 10,
       size: Math.random() * 8 + 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: colors[Math.floor(Math.random() * colors.length)] as string,
       speedX: (Math.random() - 0.5) * 15,
       speedY: -(Math.random() * 12 + 10), // Shoot upwards
       rotation: Math.random() * 360,
@@ -83,6 +83,7 @@ export function triggerConfetti() {
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
+      if (!p) continue;
 
       // Update positions
       p.x += p.speedX;

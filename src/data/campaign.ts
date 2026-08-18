@@ -5,7 +5,7 @@
  */
 
 export const campaign = {
-  beneficiaria: "Danelle Isabella Bastos César",
+  beneficiaria: "Danelle Isabela Bastos César",
 
   titulo: "Ajude Danelle na luta contra o câncer",
   subtitulo:
@@ -14,7 +14,7 @@ export const campaign = {
   /** PIX — substitua pela chave real da Danelle */
   pix: {
     chave: "81986775698",
-    titular: "Danelle Isabella Bastos César",
+    titular: "Danelle Isabela Bastos César",
     banco: "Bradesco",
     /** Coloque a imagem do QR Code em public/images/qrcode-pix.png e informe o caminho aqui */
     qrCodeSrc: "" as string,
@@ -58,7 +58,7 @@ export const campaign = {
   fotos: [
     {
       src: "/images/foto-principal.jpg",
-      legenda: "Danelle Isabella Bastos César",
+      legenda: "Danelle Isabela Bastos César",
     },
     {
       src: "/images/foto-1.jpg",
