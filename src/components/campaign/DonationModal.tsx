@@ -249,6 +249,16 @@ export function DonationModal({ open, onClose }: Props) {
           </p>
         </div>
 
+        <div className="mt-5 border-t border-border pt-4 text-center">
+          <p className="text-xs font-bold text-foreground">Nosso Agradecimento</p>
+          <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+            Caso não consiga contribuir financeiramente, seu compartilhamento e suas orações são igualmente preciosos para nós.
+          </p>
+          <p className="mt-1.5 text-xs font-semibold text-primary">
+            Que Deus abençoe você! 🙏
+          </p>
+        </div>
+
         <button
           onClick={onClose}
           className="mt-5 w-full rounded-xl border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"

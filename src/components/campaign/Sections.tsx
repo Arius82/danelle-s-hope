@@ -452,15 +452,19 @@ export function CtaFinal({ onDonate }: { onDonate: () => void }) {
   return (
     <section className="bg-warm px-5 py-16">
       <div className="mx-auto max-w-2xl text-center">
-        <Heart className="mx-auto h-7 w-7 text-primary" aria-hidden />
-        <h2 className="mt-4 text-3xl font-semibold">Você pode fazer parte dessa história.</h2>
-        <p className="mt-3 text-base text-muted-foreground">
-          Se puder contribuir, agradecemos de coração. Se não puder, compartilhar esta página também
-          ajuda muito.
+        <Heart className="mx-auto h-7 w-7 text-primary animate-pulse" aria-hidden />
+        <h2 className="mt-4 text-3xl font-bold text-foreground">Agradecemos de todo o coração!</h2>
+        <p className="mt-3 text-base text-muted-foreground leading-relaxed">
+          Cada doação e gesto de carinho fazem a diferença. Caso não possa contribuir financeiramente, 
+          você pode nos apoiar imensamente <strong>compartilhando esta página</strong> com amigos e familiares, 
+          e também nos sustentando em <strong>oração</strong> pela recuperação da Danelle.
+        </p>
+        <p className="mt-5 text-lg font-bold text-primary">
+          Que Deus abençoe grandemente a sua vida! 🙏
         </p>
         <button
           onClick={onDonate}
-          className="mt-7 w-full rounded-2xl bg-primary px-8 py-5 text-lg font-bold text-primary-foreground shadow-lift transition-transform active:scale-[0.99] animate-heartbeat hover:brightness-105 sm:w-auto"
+          className="mt-8 w-full rounded-2xl bg-primary px-8 py-5 text-lg font-bold text-primary-foreground shadow-lift transition-all hover:brightness-105 active:scale-[0.98] animate-heartbeat sm:w-auto"
         >
           ❤️ QUERO AJUDAR DANELLE
         </button>
